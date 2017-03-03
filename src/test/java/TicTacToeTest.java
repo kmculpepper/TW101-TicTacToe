@@ -1,10 +1,14 @@
 import org.junit.Before;
 import org.junit.Test;
 
+import java.io.BufferedReader;
+import java.io.IOException;
 import java.io.PrintStream;
 
+import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 /**
  * Created by kculpepp on 3/3/17.
@@ -12,32 +16,34 @@ import static org.mockito.Mockito.verify;
 public class TicTacToeTest {
 
     private PrintStream out;
-    private Player firstPlayer;
+    private BufferedReader in;
     private TicTacToe game;
+    private Board board;
 
     @Before
     public void setUp() {
 
         out = mock(PrintStream.class);
-        firstPlayer = mock(Player.class);
-        game = new TicTacToe(out, firstPlayer);
+        in = mock(BufferedReader.class);
+        board = mock(Board.class);
+        game = new TicTacToe(in, out, board);
     }
 
     @Test
-    public void shouldDrawBoardWhenStartOfGame(){
+    public void shouldDrawBoardWhenStartOfGame() throws IOException {
         game.start();
-
-        verify(out).println("1|2|3\n" +
-                "-----\n" +
-                "4|5|6\n" +
-                "-----\n" +
-                "7|8|9");
+        verify(board).drawBoard();
     }
 
     @Test
-    public void firstPlayerShouldMakeMoveWhenStartOfGame(){
-        game.start();
+    public void shouldReceive1WhenPromptingPlayerForMove() throws IOException {
+        when(in.readLine()).thenReturn("1");
+        assertEquals("1", game.promptPlayerForMove());
+    }
 
-        verify(firstPlayer).makeMove();
+    @Test
+    public void shouldReceive2WhenPromptingPlayerForMove() throws IOException {
+        when(in.readLine()).thenReturn("2");
+        assertEquals("2", game.promptPlayerForMove());
     }
 }
