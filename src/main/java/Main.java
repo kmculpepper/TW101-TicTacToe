@@ -3,7 +3,8 @@
  */
 public class Main {
     public static void main(String [] args){
-        TicTacToe game = new TicTacToe(System.out);
+        Player firstPlayer = new Player();
+        TicTacToe game = new TicTacToe(System.out, firstPlayer);
         game.start();
     }
 }

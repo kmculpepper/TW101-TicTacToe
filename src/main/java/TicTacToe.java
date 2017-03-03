@@ -5,10 +5,12 @@ import java.io.PrintStream;
  */
 public class TicTacToe {
     private PrintStream out;
+    private Player firstPlayer;
 
-    public TicTacToe(PrintStream out) {
+    public TicTacToe(PrintStream out, Player firstPlayer) {
 
         this.out = out;
+        this.firstPlayer = firstPlayer;
     }
 
     public void start() {
@@ -17,5 +19,6 @@ public class TicTacToe {
                 "4|5|6\n" +
                 "-----\n" +
                 "7|8|9");
+        firstPlayer.makeMove();
     }
 }
