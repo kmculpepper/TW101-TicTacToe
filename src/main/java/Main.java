@@ -10,8 +10,9 @@ public class Main {
     public static void main(String [] args) throws IOException {
         PrintStream out = System.out;
         BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
-        Board board = new Board(out);
-        TicTacToe game = new TicTacToe(in, out, board);
+        TicTacToeBoard ticTacToeBoard = new TicTacToeBoard(out);
+        Player firstPlayer = new Player(in, out);
+        Application game = new Application(in, out, ticTacToeBoard, firstPlayer);
         game.start();
     }
 }

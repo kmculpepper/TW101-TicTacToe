@@ -13,37 +13,34 @@ import static org.mockito.Mockito.when;
 /**
  * Created by kculpepp on 3/3/17.
  */
-public class TicTacToeTest {
+public class ApplicationTest {
 
     private PrintStream out;
     private BufferedReader in;
-    private TicTacToe game;
-    private Board board;
+    private Application game;
+    private TicTacToeBoard ticTacToeBoard;
+    private Player firstPlayer;
 
     @Before
     public void setUp() {
 
         out = mock(PrintStream.class);
         in = mock(BufferedReader.class);
-        board = mock(Board.class);
-        game = new TicTacToe(in, out, board);
+        ticTacToeBoard = mock(TicTacToeBoard.class);
+        firstPlayer = mock(Player.class);
+        game = new Application(in, out, ticTacToeBoard, firstPlayer);
     }
 
     @Test
     public void shouldDrawBoardWhenStartOfGame() throws IOException {
         game.start();
-        verify(board).drawBoard();
+        verify(ticTacToeBoard).drawBoard();
     }
 
     @Test
-    public void shouldReceive1WhenPromptingPlayerForMove() throws IOException {
-        when(in.readLine()).thenReturn("1");
-        assertEquals("1", game.promptPlayerForMove());
+    public void shouldHavePlayerMakeMoveWhenStartOfGame() throws IOException {
+        game.start();
+        verify(firstPlayer).makeMove(ticTacToeBoard);
     }
 
-    @Test
-    public void shouldReceive2WhenPromptingPlayerForMove() throws IOException {
-        when(in.readLine()).thenReturn("2");
-        assertEquals("2", game.promptPlayerForMove());
-    }
 }
