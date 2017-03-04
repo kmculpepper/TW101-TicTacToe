@@ -1,7 +1,6 @@
 import org.junit.Before;
 import org.junit.Test;
 
-import static org.junit.Assert.*;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 
@@ -12,11 +11,13 @@ public class GameTest {
 
     private Game game;
     private Board board;
+    private Player player;
 
     @Before
     public void setUp(){
         board = mock(Board.class);
-        game = new Game(board);
+        player = mock(Player.class);
+        game = new Game(board, player);
     }
 
     @Test
@@ -24,5 +25,12 @@ public class GameTest {
         game.starts();
 
         verify(board).draw();
+    }
+
+    @Test
+    public void shouldHavePlayerMakeMoveWhenGameStarts(){
+        game.starts();
+
+        verify(player).makeMove();
     }
 }

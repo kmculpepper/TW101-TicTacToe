@@ -8,7 +8,8 @@ public class Main {
     public static void main(String [] args) throws IOException {
         PrintStream out = System.out;
         Board board = new Board(out);
-        Game game = new Game(board);
+        Player player = new Player();
+        Game game = new Game(board, player);
         game.starts();
     }
 }
