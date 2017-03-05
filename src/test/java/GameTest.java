@@ -2,6 +2,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 
 /**
@@ -21,10 +22,10 @@ public class GameTest {
     }
 
     @Test
-    public void shouldDrawBoardWhenGameStarts(){
+    public void shouldDrawBoardTwiceWhenGameStarts(){
         game.starts();
 
-        verify(board).draw();
+        verify(board, times(2)).draw();
     }
 
     @Test
