@@ -10,9 +10,9 @@ import java.util.List;
 public class Main {
     public static void main(String [] args) throws IOException {
         PrintStream out = System.out;
-        Board board = new Board(out);
         List<String> locations = new ArrayList<>(Arrays.asList("1","2","3","4","5","6","7","8","9"));
-        Player player = new Player(out, locations);
+        Board board = new Board(out, locations);
+        Player player = new Player(out);
         Game game = new Game(board, player);
         game.starts();
     }

@@ -6,19 +6,14 @@ import java.util.List;
  */
 public class Player {
     private PrintStream out;
-    private List<String> locations;
 
-    public Player(PrintStream out, List<String> locations) {
+    public Player(PrintStream out) {
 
         this.out = out;
-        this.locations = locations;
     }
 
     public void makeMove() {
         out.println("Player 1 please enter a number from 1 to 9");
     }
 
-    public void markLocation(int locationToMark) {
-        locations.set(locationToMark - 1, "X");
-    }
 }

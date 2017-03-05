@@ -1,7 +1,12 @@
+import org.junit.Before;
 import org.junit.Test;
 
 import java.io.PrintStream;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
+import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
@@ -11,11 +16,19 @@ import static org.mockito.Mockito.verify;
  */
 public class BoardTest {
 
+    private List<String> locations;
+    private PrintStream out;
+    private Board board;
+
+    @Before
+    public void setUp(){
+        locations = new ArrayList<>(Arrays.asList("1","2","3","4","5","6","7","8","9"));
+        out = mock(PrintStream.class);
+        board = new Board(out, locations);
+    }
+
     @Test
     public void shouldDrawBoardWhenBoardDraws(){
-        PrintStream out = mock(PrintStream.class);
-        Board board = new Board(out);
-
         board.draw();
 
         verify(out).println("1|2|3\n" +
@@ -23,5 +36,12 @@ public class BoardTest {
                 "4|5|6\n" +
                 "-----\n" +
                 "7|8|9");
+    }
+
+    @Test
+    public void shouldMarkXAtLocation1WhenMarkingLocation1(){
+        board.markLocation(1);
+
+        assertThat(locations.get(0), is("X"));
     }
 }

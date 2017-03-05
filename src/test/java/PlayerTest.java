@@ -2,6 +2,8 @@ import org.junit.Before;
 import org.junit.Test;
 import org.mockito.hamcrest.MockitoHamcrest;
 
+import java.io.BufferedReader;
+import java.io.IOException;
 import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -13,6 +15,7 @@ import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 /**
  * Created by kculpepp on 3/4/17.
@@ -20,14 +23,14 @@ import static org.mockito.Mockito.verify;
 public class PlayerTest {
 
     private Player player;
-    PrintStream out;
-    private List<String> locations;
+    private PrintStream out;
+    private BufferedReader in;
 
     @Before
     public void setUp(){
         out = mock(PrintStream.class);
-        locations = new ArrayList<>(Arrays.asList("1","2","3","4","5","6","7","8","9"));
-        player = new Player(out, locations);
+        in = mock(BufferedReader.class);
+        player = new Player(out);
     }
 
     @Test
@@ -37,11 +40,5 @@ public class PlayerTest {
         verify(out).println(MockitoHamcrest.argThat(both(containsString("Player 1")).and(containsString("enter a number"))));
     }
 
-    @Test
-    public void shouldMarkXAtLocation1WhenMarkingLocation1(){
-        player.markLocation(1);
-
-        assertThat(locations.get(0), is("X"));
-    }
 
 }
