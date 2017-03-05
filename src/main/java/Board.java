@@ -15,11 +15,13 @@ public class Board {
     }
 
     public void draw() {
-        out.println("1|2|3\n" +
-                "-----\n" +
-                "4|5|6\n" +
-                "-----\n" +
-                "7|8|9");
+        String output = String.format("%s|%s|%s\n" +
+                                      "-----\n" +
+                                      "%s|%s|%s\n" +
+                                      "-----\n" +
+                                      "%s|%s|%s", locations.toArray());
+
+        out.println(output);
     }
 
     public void markLocation(int locationToMark) {

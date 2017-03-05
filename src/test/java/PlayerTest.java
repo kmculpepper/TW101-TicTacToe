@@ -25,19 +25,38 @@ public class PlayerTest {
     private Player player;
     private PrintStream out;
     private BufferedReader in;
+    private Board board;
 
     @Before
     public void setUp(){
         out = mock(PrintStream.class);
         in = mock(BufferedReader.class);
-        player = new Player(out);
+        board = mock(Board.class);
+        player = new Player(in, out, board);
     }
 
     @Test
-    public void shouldPromptUserWhenMakingMove(){
+    public void shouldPromptUserWhenMakingMove() throws IOException {
+        when(in.readLine()).thenReturn("-1");
         player.makeMove();
 
         verify(out).println(MockitoHamcrest.argThat(both(containsString("Player 1")).and(containsString("enter a number"))));
+    }
+
+    @Test
+    public void shouldMarkLocationWhenMakingMove() throws IOException {
+        when(in.readLine()).thenReturn("-1");
+        player.makeMove();
+
+        verify(board).markLocation(-1);
+    }
+
+    @Test
+    public void shouldMarkLocationAt1WhenPlayerMakesMoveToLocation1() throws IOException {
+        when(in.readLine()).thenReturn("1");
+        player.makeMove();
+
+        verify(board).markLocation(1);
     }
 
 
